@@ -198,6 +198,41 @@ button,
   background: #f8f9fa;
 }
 
+.btn-share-secondary {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 50px;
+  padding: 14px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #4a90d9;
+  background: #ffffff;
+  border: 2px solid #4a90d9;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-share-secondary:hover {
+  background: #eef5fc;
+}
+
+.btn-share-secondary:active {
+  transform: scale(0.98);
+}
+
+.btn-share-secondary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn-share-secondary__icon {
+  flex-shrink: 0;
+}
+
 .btn-flag-red {
   background: #ff6b6b;
   box-shadow: 0 4px 14px rgba(255, 107, 107, 0.3);
@@ -581,4 +616,257 @@ button,
 
 .section-alt {
   background: #f8f9fa;
+}
+
+/* —— Locked pro feature previews (free tier) —— */
+.locked-feature-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.locked-feature-card__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgba(248, 249, 250, 0.85);
+  pointer-events: none;
+}
+
+.locked-feature-card__content {
+  position: relative;
+  z-index: 1;
+  padding: 1rem 2.5rem 1rem 1rem;
+}
+
+.locked-feature-card__lock {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.locked-feature-card__title {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1.35;
+  color: #1a1a2e;
+}
+
+.locked-feature-card__desc {
+  margin-top: 0.45rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: #4b5563;
+}
+
+.paywall-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(26, 26, 46, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.paywall-modal {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2rem 1.5rem 1.75rem;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15);
+}
+
+.paywall-close {
+  position: fixed;
+  top: max(1rem, env(safe-area-inset-top));
+  right: max(1rem, env(safe-area-inset-right));
+  z-index: 101;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+  font-size: 1.1rem;
+  color: #6b7280;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.paywall-modal__title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  text-align: center;
+  color: #1a1a2e;
+}
+
+.paywall-features {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.paywall-features__item {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  margin-bottom: 0.85rem;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: #1a1a2e;
+}
+
+.paywall-features__check {
+  flex-shrink: 0;
+  font-weight: 700;
+  color: #52c9a0;
+}
+
+/* —— Pro result cards —— */
+.pro-card-fade {
+  animation: fade-in 400ms ease forwards;
+}
+
+.card-skeleton {
+  pointer-events: none;
+}
+
+.card-skeleton__line {
+  height: 12px;
+  margin-top: 12px;
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    #e5e7eb 0%,
+    #f3f4f6 50%,
+    #e5e7eb 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+
+.card-skeleton__line--short {
+  width: 40%;
+  margin-top: 0;
+}
+
+.card-skeleton__line--medium {
+  width: 70%;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.dna-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dna-chart__row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.dna-chart__labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.dna-chart__style {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.dna-chart__pct {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.dna-chart__track {
+  height: 10px;
+  border-radius: 999px;
+  background: #f3f4f6;
+  overflow: hidden;
+}
+
+.dna-chart__bar {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.6s ease;
+  min-width: 4px;
+}
+
+.the-fix-box {
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(82, 201, 160, 0.12);
+  border: 1px solid rgba(82, 201, 160, 0.35);
+}
+
+.the-fix-box__label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #52c9a0;
+}
+
+.the-fix-box__text {
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #1a1a2e;
+}
+
+.pro-field-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #4a90d9;
+}
+
+.pro-field-value {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #1a1a2e;
+}
+
+.pro-share-preview {
+  padding: 1.25rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #eef5fc 0%, #f8f9fa 100%);
+  border: 1px solid #e5e7eb;
 }

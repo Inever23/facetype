@@ -73,6 +73,7 @@ export default function App() {
           <Result
             result={result}
             loading={resultLoading}
+            answers={answers}
             onRetake={handleRetake}
           />
         )
