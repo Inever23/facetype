@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { fetchPersonalityResult } from './api/anthropic'
 import AppShell from './components/AppShell'
 import FaceScan from './screens/FaceScan'
@@ -15,6 +15,8 @@ const SCREENS = {
   result: 'result',
 }
 
+const FADE_MS = 300
+
 export default function App() {
   const [screen, setScreen] = useState(SCREENS.home)
   const [transitioning, setTransitioning] = useState(false)
@@ -30,7 +32,7 @@ export default function App() {
       setScreen(next)
       setDisplayScreen(next)
       setTransitioning(false)
-    }, 400)
+    }, FADE_MS)
   }, [displayScreen])
 
   const handleScanComplete = () => goTo(SCREENS.quiz)
@@ -55,12 +57,6 @@ export default function App() {
     setResultLoading(false)
     goTo(SCREENS.home)
   }
-
-  useEffect(() => {
-    if (screen !== displayScreen && !transitioning) {
-      setDisplayScreen(screen)
-    }
-  }, [screen, displayScreen, transitioning])
 
   const renderScreen = () => {
     switch (displayScreen) {
@@ -88,7 +84,7 @@ export default function App() {
   return (
     <AppShell>
       <div
-        className={`min-h-full flex-1 ${transitioning ? 'screen-exit' : 'screen-enter'}`}
+        className={`min-h-[100dvh] ${transitioning ? 'screen-exit' : 'screen-enter'}`}
         key={displayScreen}
       >
         {renderScreen()}

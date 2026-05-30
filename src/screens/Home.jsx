@@ -1,4 +1,5 @@
-import FloatingParticles from '../components/FloatingParticles'
+import ScreenWrapper from '../components/ScreenWrapper'
+import FixedBottomBar from '../components/FixedBottomBar'
 import { resumeAudioContext } from '../utils/scanAudio'
 
 export default function Home({ onStart }) {
@@ -8,35 +9,39 @@ export default function Home({ onStart }) {
   }
 
   return (
-    <div className="relative flex min-h-full flex-col justify-center overflow-hidden px-8 py-12">
-      <FloatingParticles />
+    <>
+      <ScreenWrapper hasFixedFooter className="home-gradient-bg">
+        <div className="px-8 pt-16 pb-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#4A90D9]">
+            Dating personality
+          </p>
+          <h1 className="mt-3 text-5xl font-extrabold tracking-tight text-[#1a1a2e]">
+            FaceType
+          </h1>
+          <p className="mt-5 text-xl font-semibold leading-snug text-[#1a1a2e]">
+            Your face reveals how you love.
+          </p>
+          <p className="mt-3 text-base leading-relaxed text-[#6b7280]">
+            Takes 60 seconds. Uncomfortably accurate.
+          </p>
 
-      <div className="relative z-10">
-        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#8b1a1a]/90">
-          Dating personality
-        </p>
-        <h1 className="mt-3 bg-gradient-to-b from-[#faf6f2] to-[#f5f0eb]/75 bg-clip-text text-5xl font-extrabold tracking-tight text-transparent">
-          FaceType
-        </h1>
-        <p className="mt-5 text-xl font-semibold leading-snug text-[#f5f0eb]/95">
-          Your face reveals how you love.
-        </p>
-        <p className="mt-3 text-base leading-relaxed text-[#9a9a9a]">
-          Takes 60 seconds. Uncomfortably accurate.
-        </p>
+          <div className="section-alt mt-10 rounded-2xl border border-[#e5e7eb] bg-[#f8f9fa] px-5 py-4">
+            <p className="text-sm text-[#6b7280]">
+              Snap a photo, answer 10 quick flags, and get your dating style — powered by AI.
+            </p>
+          </div>
 
-        <button
-          type="button"
-          onClick={handleStart}
-          className="btn-premium mt-14 w-full rounded-2xl py-5 text-lg font-bold text-[#f5f0eb]"
-        >
+          <p className="mt-8 text-center text-sm text-[#6b7280]">
+            100% anonymous. Nothing is stored.
+          </p>
+        </div>
+      </ScreenWrapper>
+
+      <FixedBottomBar>
+        <button type="button" onClick={handleStart} className="btn-primary">
           Start My Scan
         </button>
-
-        <p className="mt-6 text-center text-sm tracking-wide text-[#9a9a9a]/90">
-          100% anonymous. Nothing is stored.
-        </p>
-      </div>
-    </div>
+      </FixedBottomBar>
+    </>
   )
 }

@@ -19,9 +19,12 @@ export const SCAN_MESSAGES = [
 ]
 
 export const PROCESSING_MESSAGES = [
-  'Combining scan data…',
-  'Matching your pattern…',
-  'Almost ready…',
+  'Analyzing your scan data…',
+  'Mapping emotional response patterns…',
+  'Cross-referencing 847 relationship profiles…',
+  'Identifying your attachment style…',
+  'Calculating compatibility matrix…',
+  'Finalizing your dating profile…',
 ]
 
 export const SYSTEM_PROMPT = `You are a dating personality analyzer. Based on a user's 10 green and red flag answers, assign them exactly one of these 10 dating styles: The Protector, The Chaser, The Nurturer, The Free Spirit, The Analyzer, The Magnet, The Mirror, The Fixer, The Ghost, The Romantic. Respond ONLY with valid JSON in this exact format with no markdown or extra text: {"style": "The Protector", "emoji": "🛡️", "description": "2 sentence description of this dating style", "compatibility": "One sentence about who they are most compatible with", "roast": "One funny but accurate sentence that gently calls them out", "celebrity": "One celebrity or fictional character who matches this style"}`

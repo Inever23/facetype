@@ -1,13 +1,27 @@
 import { useEffect, useState } from 'react'
 import { PROCESSING_MESSAGES } from '../constants/questions'
+import ScreenWrapper from '../components/ScreenWrapper'
 
-const DURATION_MS = 2500
-const MESSAGE_MS = 850
+const DURATION_MS = 6000
+const MESSAGE_MS = 1000
 
 export default function Processing({ answers, onComplete }) {
   const [messageIndex, setMessageIndex] = useState(0)
+  const [progress, setProgress] = useState(0)
 
   useEffect(() => {
+    const start = performance.now()
+    let rafId
+
+    const tick = (now) => {
+      const elapsed = now - start
+      setProgress(Math.min(100, (elapsed / DURATION_MS) * 100))
+      if (elapsed < DURATION_MS) {
+        rafId = requestAnimationFrame(tick)
+      }
+    }
+    rafId = requestAnimationFrame(tick)
+
     const msgInterval = setInterval(() => {
       setMessageIndex((i) => Math.min(i + 1, PROCESSING_MESSAGES.length - 1))
     }, MESSAGE_MS)
@@ -17,24 +31,28 @@ export default function Processing({ answers, onComplete }) {
     }, DURATION_MS)
 
     return () => {
+      cancelAnimationFrame(rafId)
       clearInterval(msgInterval)
       clearTimeout(doneTimer)
     }
   }, [answers, onComplete])
 
   return (
-    <div className="flex min-h-full flex-col items-center justify-center px-8">
-      <div
-        className="h-28 w-28 rounded-full border-4 border-[#8b1a1a]/40"
-        style={{ animation: 'spin-pulse 1.5s ease-in-out infinite' }}
-      >
-        <div className="flex h-full w-full items-center justify-center">
-          <div className="h-14 w-14 rounded-full bg-[#8b1a1a]/60" />
-        </div>
+    <ScreenWrapper className="flex flex-col items-center justify-center bg-white px-8">
+      <div className="processing-pulse">
+        <div className="processing-pulse__core" />
       </div>
-      <p className="mt-10 text-center text-lg text-[#f5f0eb]/80 transition-opacity duration-300">
+
+      <p className="mt-10 max-w-[300px] text-center text-base leading-relaxed text-[#1a1a2e]">
         {PROCESSING_MESSAGES[messageIndex]}
       </p>
-    </div>
+
+      <div className="processing-progress-track">
+        <div
+          className="processing-progress-fill"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+    </ScreenWrapper>
   )
 }

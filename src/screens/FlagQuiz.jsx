@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { QUIZ_QUESTIONS } from '../constants/questions'
+import ScreenWrapper from '../components/ScreenWrapper'
+import FixedBottomBar from '../components/FixedBottomBar'
 
 export default function FlagQuiz({ onComplete }) {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -27,31 +29,35 @@ export default function FlagQuiz({ onComplete }) {
   }
 
   return (
-    <div className="flex min-h-full flex-col px-6 py-10">
-      <p className="text-center text-sm text-[#9a9a9a]">Confirm your scan</p>
-      <p className="mt-4 text-center text-sm font-semibold text-[#f5f0eb]/70">
-        {currentIndex + 1} / {total}
-      </p>
-
-      <div className="flex flex-1 flex-col items-center justify-center">
-        <div
-          key={currentIndex}
-          className={`w-full rounded-2xl border border-white/10 bg-white/5 px-6 py-10 text-center backdrop-blur-sm ${
-            sliding ? 'card-slide-out' : 'screen-enter'
-          }`}
-        >
-          <p className="text-lg font-medium leading-relaxed text-[#f5f0eb]">
-            {question}
+    <>
+      <ScreenWrapper hasFixedFooter className="bg-white">
+        <div className="px-6 pt-10">
+          <p className="text-center text-sm text-[#6b7280]">Confirm your scan</p>
+          <p className="mt-3 text-center text-sm font-semibold text-[#4A90D9]">
+            {currentIndex + 1} / {total}
           </p>
-        </div>
-      </div>
 
-      <div className="flex flex-col gap-4 pb-4">
+          <div className="mt-10 flex min-h-[40vh] items-center justify-center">
+            <div
+              key={currentIndex}
+              className={`card w-full px-6 py-10 text-center ${
+                sliding ? 'card-slide-out' : 'card-bounce-in'
+              }`}
+            >
+              <p className="text-lg font-medium leading-relaxed text-[#1a1a2e]">
+                {question}
+              </p>
+            </div>
+          </div>
+        </div>
+      </ScreenWrapper>
+
+      <FixedBottomBar>
         <button
           type="button"
           disabled={sliding}
           onClick={() => handleAnswer('green')}
-          className="w-full rounded-2xl bg-emerald-900/80 py-5 text-lg font-bold text-emerald-100 transition active:scale-[0.98] disabled:opacity-50"
+          className="btn-flag-green"
         >
           🟢 Green Flag
         </button>
@@ -59,11 +65,11 @@ export default function FlagQuiz({ onComplete }) {
           type="button"
           disabled={sliding}
           onClick={() => handleAnswer('red')}
-          className="w-full rounded-2xl bg-red-950/80 py-5 text-lg font-bold text-red-100 transition active:scale-[0.98] disabled:opacity-50"
+          className="btn-flag-red"
         >
           🔴 Red Flag
         </button>
-      </div>
-    </div>
+      </FixedBottomBar>
+    </>
   )
 }
