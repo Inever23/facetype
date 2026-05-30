@@ -8,7 +8,13 @@
   --color-subtext: #6b7280;
   --color-surface: #ffffff;
   --color-surface-alt: #f8f9fa;
-  --font-display: "Syne", system-ui, sans-serif;
+  --font-heading: "Nunito", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+:root {
+  --font-heading: "Nunito", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
 }
 
 * {
@@ -25,8 +31,81 @@ body,
 }
 
 body {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
+  font-weight: 400;
   color: var(--color-heading);
+}
+
+/* —— Global typography —— */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.text-5xl,
+.text-4xl,
+.text-3xl,
+.text-2xl,
+.text-xl {
+  font-family: var(--font-heading);
+  font-weight: 800;
+}
+
+.facetype-title {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+article.result-card h2 {
+  font-family: var(--font-heading);
+  font-weight: 900;
+}
+
+.result-card p.mt-5,
+.result-roast-block p.mt-2 {
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+
+.card > p.text-lg {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+p,
+.text-base,
+.text-\[15px\] {
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+
+.text-xs,
+.text-sm,
+.text-\[10px\] {
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+
+.text-xs.font-semibold,
+.text-sm.font-semibold,
+.text-\[10px\].font-semibold {
+  font-weight: 400;
+}
+
+button,
+.btn-primary,
+.btn-secondary,
+.btn-flag-green,
+.btn-flag-red {
+  font-family: var(--font-body);
+  font-weight: 600;
+}
+
+.scan-status {
+  font-family: var(--font-body);
+  font-weight: 400;
 }
 
 /* —— Scrollable screens —— */
@@ -82,13 +161,11 @@ body {
   border-radius: 50px;
   padding: 16px 24px;
   font-size: 1.05rem;
-  font-weight: 700;
   color: #ffffff;
   background: #4a90d9;
   box-shadow: 0 4px 14px rgba(74, 144, 217, 0.35);
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  font-family: inherit;
 }
 
 .btn-primary:hover {
@@ -109,13 +186,11 @@ body {
   border-radius: 50px;
   padding: 14px 24px;
   font-size: 0.95rem;
-  font-weight: 600;
   color: #1a1a2e;
   background: #ffffff;
   border: 1px solid #e5e7eb;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   cursor: pointer;
-  font-family: inherit;
   transition: background 0.2s ease;
 }
 
@@ -130,11 +205,9 @@ body {
   border-radius: 50px;
   padding: 16px 24px;
   font-size: 1.05rem;
-  font-weight: 700;
   color: #ffffff;
   width: 100%;
   cursor: pointer;
-  font-family: inherit;
   transition: transform 0.2s ease;
 }
 
@@ -145,11 +218,9 @@ body {
   border-radius: 50px;
   padding: 16px 24px;
   font-size: 1.05rem;
-  font-weight: 700;
   color: #ffffff;
   width: 100%;
   cursor: pointer;
-  font-family: inherit;
   transition: transform 0.2s ease;
 }
 
@@ -199,8 +270,8 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 68%;
-  height: 48%;
+  width: 88.4%;
+  height: 62.4%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   border: 2px solid rgba(255, 255, 255, 0.75);

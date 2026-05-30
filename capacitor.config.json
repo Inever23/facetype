@@ -1,0 +1,8 @@
+{
+  "appId": "com.facetype.app",
+  "appName": "FaceType",
+  "webDir": "dist",
+  "ios": {
+    "contentInset": "automatic"
+  }
+}

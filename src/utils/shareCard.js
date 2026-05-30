@@ -34,7 +34,7 @@ export async function generateShareImage(result) {
   ctx.fillRect(0, 0, width, 280)
 
   ctx.fillStyle = '#4A90D9'
-  ctx.font = '600 36px Syne, sans-serif'
+  ctx.font = '900 36px Nunito, sans-serif'
   ctx.textAlign = 'center'
   ctx.fillText('FaceType', width / 2, 120)
 
@@ -42,11 +42,11 @@ export async function generateShareImage(result) {
   ctx.fillText(result.emoji, width / 2, 420)
 
   ctx.fillStyle = '#1a1a2e'
-  ctx.font = '800 72px Syne, sans-serif'
+  ctx.font = '900 72px Nunito, sans-serif'
   ctx.fillText(result.style, width / 2, 560)
 
   ctx.fillStyle = '#6b7280'
-  ctx.font = '400 40px Syne, sans-serif'
+  ctx.font = '400 40px Inter, sans-serif'
   const descLines = wrapText(ctx, result.description, width - 160)
   let y = 680
   for (const line of descLines.slice(0, 5)) {
@@ -55,7 +55,7 @@ export async function generateShareImage(result) {
   }
 
   ctx.fillStyle = '#FF6B6B'
-  ctx.font = 'italic 36px Syne, sans-serif'
+  ctx.font = 'italic 400 36px Inter, sans-serif'
   const roastLines = wrapText(ctx, result.roast, width - 160)
   y += 40
   for (const line of roastLines.slice(0, 3)) {
@@ -64,7 +64,7 @@ export async function generateShareImage(result) {
   }
 
   ctx.fillStyle = '#9ca3af'
-  ctx.font = '400 32px Syne, sans-serif'
+  ctx.font = '400 32px Inter, sans-serif'
   ctx.fillText('facetype.app', width / 2, height - 80)
 
   return new Promise((resolve) => {

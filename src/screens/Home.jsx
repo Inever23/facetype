@@ -15,7 +15,7 @@ export default function Home({ onStart }) {
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#4A90D9]">
             Dating personality
           </p>
-          <h1 className="mt-3 text-5xl font-extrabold tracking-tight text-[#1a1a2e]">
+          <h1 className="facetype-title mt-3 text-5xl tracking-tight text-[#1a1a2e]">
             FaceType
           </h1>
           <p className="mt-5 text-xl font-semibold leading-snug text-[#1a1a2e]">

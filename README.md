@@ -22,6 +22,24 @@ npm run dev
 
 Open on your phone or use browser dev tools mobile view (max width 430px).
 
+## iOS (Capacitor)
+
+Requires Xcode on macOS.
+
+```bash
+npm install
+npm run cap:sync    # builds web app and copies to ios/
+npm run cap:open:ios # opens Xcode
+```
+
+In Xcode, select a team for signing, then run on a simulator or device.
+
+- **App name:** FaceType  
+- **Bundle ID:** `com.facetype.app`  
+- Camera permission is configured in `ios/App/App/Info.plist` (`NSCameraUsageDescription`).
+
+After web changes, always run `npm run cap:sync` before rebuilding in Xcode.
+
 ## Deploy to Vercel
 
 1. Push this repo to GitHub.
