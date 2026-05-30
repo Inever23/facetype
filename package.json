@@ -14,9 +14,12 @@
   "dependencies": {
     "@capacitor/core": "^8.3.4",
     "@capacitor/ios": "^8.3.4",
+    "@stripe/react-stripe-js": "^6.5.0",
+    "@stripe/stripe-js": "^9.7.0",
     "canvas-confetti": "^1.9.4",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "stripe": "^22.2.0"
   },
   "devDependencies": {
     "@capacitor/cli": "^8.3.4",

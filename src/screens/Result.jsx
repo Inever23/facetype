@@ -6,7 +6,9 @@ import {
 } from '../api/proFeatures'
 import CardSkeleton from '../components/CardSkeleton'
 import LockedFeatureCard from '../components/LockedFeatureCard'
+import PaymentSheet from '../components/PaymentSheet'
 import PaywallModal from '../components/PaywallModal'
+import ProToast from '../components/ProToast'
 import { LOCKED_PRO_FEATURES } from '../constants/lockedFeatures'
 import AttachmentDNAChart from '../components/pro/AttachmentDNAChart'
 import ScreenWrapper from '../components/ScreenWrapper'
@@ -14,6 +16,7 @@ import FixedBottomBar from '../components/FixedBottomBar'
 import { fireResultConfetti } from '../utils/confetti'
 import { shareFreeResult } from '../utils/shareFreeCard'
 import { shareProResult } from '../utils/shareProCard'
+import { isProUnlocked, setProUnlocked } from '../utils/proStorage'
 function FadeCard({ show, children, className = '' }) {
   if (!show) return <CardSkeleton />
   return (
@@ -24,8 +27,11 @@ function FadeCard({ show, children, className = '' }) {
 }
 
 export default function Result({ result, loading, answers, onRetake }) {
-  const [isPro, setIsPro] = useState(false)
+  const [isPro, setIsPro] = useState(() => isProUnlocked())
   const [showPaywall, setShowPaywall] = useState(false)
+  const [showPaymentSheet, setShowPaymentSheet] = useState(false)
+  const [showProToast, setShowProToast] = useState(false)
+  const [proJustUnlocked, setProJustUnlocked] = useState(false)
   const [sharing, setSharing] = useState(false)
   const [freeSharing, setFreeSharing] = useState(false)
   const [proData, setProData] = useState({ dna: null, toxic: null, match: null })
@@ -42,8 +48,11 @@ export default function Result({ result, loading, answers, onRetake }) {
   useEffect(() => {
     if (loading) {
       confettiFired.current = false
-      setIsPro(false)
+      setIsPro(isProUnlocked())
       setShowPaywall(false)
+      setShowPaymentSheet(false)
+      setShowProToast(false)
+      setProJustUnlocked(false)
       setProData({ dna: null, toxic: null, match: null })
       setProReady({ dna: false, toxic: false, match: false })
     }
@@ -79,9 +88,19 @@ export default function Result({ result, loading, answers, onRetake }) {
     }
   }, [isPro, result, answers])
 
-  const handleMockUnlock = () => {
+  const handlePaymentSuccess = () => {
+    setProUnlocked()
     setShowPaywall(false)
+    setShowPaymentSheet(false)
     setIsPro(true)
+    setProJustUnlocked(true)
+    setShowProToast(true)
+    setTimeout(() => setShowProToast(false), 3500)
+  }
+
+  const handleStartPayment = () => {
+    setShowPaywall(false)
+    setShowPaymentSheet(true)
   }
 
   const handleShare = async () => {
@@ -175,7 +194,7 @@ export default function Result({ result, loading, answers, onRetake }) {
         </ScreenWrapper>
 
         <FixedBottomBar>
-          <button type="button" className="btn-primary" onClick={() => setShowPaywall(true)}>
+          <button type="button" className="btn-primary" onClick={() => setShowPaymentSheet(true)}>
             Unlock Your Full Profile — $1.99
           </button>
           <p className="text-center text-xs text-[#6b7280]">One time. No subscription.</p>
@@ -185,7 +204,17 @@ export default function Result({ result, loading, answers, onRetake }) {
         </FixedBottomBar>
 
         {showPaywall && (
-          <PaywallModal onUnlock={handleMockUnlock} onClose={() => setShowPaywall(false)} />
+          <PaywallModal
+            onUnlock={handleStartPayment}
+            onClose={() => setShowPaywall(false)}
+          />
+        )}
+
+        {showPaymentSheet && (
+          <PaymentSheet
+            onSuccess={handlePaymentSuccess}
+            onClose={() => setShowPaymentSheet(false)}
+          />
         )}
       </>
     )
@@ -193,8 +222,12 @@ export default function Result({ result, loading, answers, onRetake }) {
 
   return (
     <>
+      <ProToast visible={showProToast} />
+
       <ScreenWrapper hasFixedFooter className="bg-[#f8f9fa]">
-        <div className="space-y-5 px-5 pt-8 pb-4">
+        <div
+          className={`space-y-5 px-5 pt-8 pb-4 ${proJustUnlocked ? 'pro-results-reveal' : ''}`}
+        >
           {/* Card 1 — Dating Style (always visible when pro) */}
           <article className="pro-card-fade result-card">
             <div className="result-card__accent" aria-hidden />

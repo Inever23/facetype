@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react'
 import { fetchPersonalityResult } from './api/anthropic'
+import { clearProUnlocked } from './utils/proStorage'
 import AppShell from './components/AppShell'
 import FaceScan from './screens/FaceScan'
 import FlagQuiz from './screens/FlagQuiz'
@@ -52,6 +53,7 @@ export default function App() {
   }, [goTo])
 
   const handleRetake = () => {
+    clearProUnlocked()
     setAnswers([])
     setResult(null)
     setResultLoading(false)

@@ -40,6 +40,15 @@ In Xcode, select a team for signing, then run on a simulator or device.
 
 After web changes, always run `npm run cap:sync` before rebuilding in Xcode.
 
+## Stripe payments (Pro unlock)
+
+1. Add to **Vercel** environment variables:
+   - `STRIPE_SECRET_KEY` = your Stripe secret key (`sk_test_...`)
+2. Add to `.env` (local) or Vercel:
+   - `REACT_APP_STRIPE_PUBLISHABLE_KEY` = your Stripe publishable key (`pk_test_...`)
+3. For local API testing, run `npx vercel dev` (serves `/api/create-payment-intent` and the Vite app).
+4. Production deploy on Vercel runs the serverless function automatically from `/api`.
+
 ## Deploy to Vercel
 
 1. Push this repo to GitHub.
